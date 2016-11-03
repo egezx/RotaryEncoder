@@ -12,6 +12,8 @@ byte stateButton = HIGH;
 
 unsigned long buttonTimeOut = millis();
 
+
+
 void setup()
 {
   Serial.begin(19200);
@@ -23,6 +25,8 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(pinA), HandleRotaryA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(pinB), HandleRotaryB, CHANGE);
 }
+
+
 
 enum EncoderState
 {
@@ -42,10 +46,15 @@ enum EncoderState
 
 volatile EncoderState eState = WAIT_ALL;
 
+
+
+
 void loop()
 {
   ReadButton();
 }
+
+
 
 void ReadButton()
 {
@@ -61,10 +70,16 @@ void ReadButton()
   }
 }
 
+
+
+
 void ButtonPushed()
 {
   Serial.println("BUTTON");
 }
+
+
+
 
 void Rotate(int dir)
 {
@@ -79,6 +94,9 @@ void Rotate(int dir)
     Serial.println("COUNTER-CLOCKWISE");
   }
 }
+
+
+
 
 void HandleRotary(int pin, byte state)
 {
@@ -169,6 +187,9 @@ void HandleRotary(int pin, byte state)
     eState = WAIT_ALL;
 }
 
+
+
+
 void HandleRotaryA()
 {
   byte newState = digitalRead(pinA);
@@ -178,6 +199,9 @@ void HandleRotaryA()
     HandleRotary(pinA, stateA);
   }
 }
+
+
+
 
 void HandleRotaryB()
 {
